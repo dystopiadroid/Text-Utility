@@ -5,12 +5,22 @@ export default function TextForm(props) {
     const handleOnUpClick = () => {
         let upText = text.toUpperCase()
         setText(upText)
+        props.showAlert('Uppercase is selected','success')
+    }
+    const handleExtraSpaces = () => {
+        let newText = text.split(/[ ]+/)
+        setText(newText.join(' '))
+    }
+    const handleFirstLetterCaps = () => {
+        let first = text.charAt(0).toUpperCase()
+        setText(first + text.slice(1))
     }
     const handleOnChange = (event) => {
         setText(event.target.value)
     }
     const handleOnLowClick = () => {
         setText(text.toLowerCase())
+        props.showAlert('lowercase is selected','success')
     }
 
     const [text, setText] = useState('');
@@ -25,8 +35,10 @@ export default function TextForm(props) {
                         backgroundColor: props.mode === 'light' ? 'white' : '#212529'
                     }}></textarea>
                 </div>
-                <button className="btn btn-primary" onClick={handleOnUpClick}>Convert to UPPERCASE</button>
-                <button className="btn btn-danger mx-2" onClick={handleOnLowClick}>convert to lowercase</button>
+                <button className="btn btn-success" onClick={handleOnUpClick}>Convert to UPPERCASE</button>
+                <button className="btn btn-success mx-2" onClick={handleOnLowClick}>convert to lowercase</button>
+                <button className="btn btn-success " onClick={handleExtraSpaces}>Clear Extra Spaces</button>
+                <button className="btn btn-success mx-2" onClick={handleFirstLetterCaps}>First letter Capitaliser</button>
             </div>
             <div className="container my-3 text-center" style={{ color: props.mode === 'dark' ? 'white' : 'black' }}>
                 <div className="summary my-5">
