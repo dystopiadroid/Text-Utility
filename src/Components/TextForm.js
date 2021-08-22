@@ -5,22 +5,24 @@ export default function TextForm(props) {
     const handleOnUpClick = () => {
         let upText = text.toUpperCase()
         setText(upText)
-        props.showAlert('Uppercase is selected','success')
+        props.showAlert('Uppercase is selected', 'success')
     }
     const handleExtraSpaces = () => {
         let newText = text.split(/[ ]+/)
         setText(newText.join(' '))
+        props.showAlert('ExtraSpaces remover is selected', 'success')
     }
     const handleFirstLetterCaps = () => {
         let first = text.charAt(0).toUpperCase()
         setText(first + text.slice(1))
+        props.showAlert('First letter capitaliser is selected', 'success')
     }
     const handleOnChange = (event) => {
         setText(event.target.value)
     }
     const handleOnLowClick = () => {
         setText(text.toLowerCase())
-        props.showAlert('lowercase is selected','success')
+        props.showAlert('lowercase is selected', 'success')
     }
 
     const [text, setText] = useState('');
@@ -35,10 +37,12 @@ export default function TextForm(props) {
                         backgroundColor: props.mode === 'light' ? 'white' : '#212529'
                     }}></textarea>
                 </div>
-                <button className="btn btn-success" onClick={handleOnUpClick}>Convert to UPPERCASE</button>
-                <button className="btn btn-success mx-2" onClick={handleOnLowClick}>convert to lowercase</button>
-                <button className="btn btn-success " onClick={handleExtraSpaces}>Clear Extra Spaces</button>
-                <button className="btn btn-success mx-2" onClick={handleFirstLetterCaps}>First letter Capitaliser</button>
+                <div className="d-flex justify-content-center">
+                    <button className="btn btn-success" onClick={handleOnUpClick}>Convert to UPPERCASE</button>
+                    <button className="btn btn-success mx-2" onClick={handleOnLowClick}>convert to lowercase</button>
+                    <button className="btn btn-success " onClick={handleExtraSpaces}>Clear Extra Spaces</button>
+                    <button className="btn btn-success mx-2" onClick={handleFirstLetterCaps}>First letter Capitaliser</button>
+                </div>
             </div>
             <div className="container my-3 text-center" style={{ color: props.mode === 'dark' ? 'white' : 'black' }}>
                 <div className="summary my-5">
@@ -47,7 +51,7 @@ export default function TextForm(props) {
                 </div>
                 <div className="preview my-5">
                     <h3 className='my-3'><strong>Preview</strong></h3>
-                    <p  style={{color : props.mode === 'dark' ? 'bisque' : 'black'}}>{text.length>0 ? text : 'This is your preview'}</p>
+                    <p style={{ color: props.mode === 'dark' ? 'bisque' : 'black' }}>{text.length > 0 ? text : 'This is your preview'}</p>
                 </div>
             </div>
         </>
